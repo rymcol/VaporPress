@@ -14,7 +14,19 @@ let app = Application(providers: [
 ])
 
 app.get("/") { request in
-    return try app.view("template.mustache", context: [
+    return try app.view("index.mustache", context: [
+        "greeting": "Hello, world!"
+    ])
+}
+
+app.get("blog") { request in
+    return try app.view("index.mustache", context: [
+        "greeting": "Hello, world!"
+    ])
+}
+
+app.get("admin/post") { request in
+    return try app.view("index.mustache", context: [
         "greeting": "Hello, world!"
     ])
 }
