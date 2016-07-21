@@ -1,7 +1,6 @@
 import Vapor
 import VaporMustache
-
-
+import VaporSQLite
 /*
     Includes are relative to the Views (`Resources/Views`)
     directory by default.
@@ -22,24 +21,22 @@ let workDir: String?
 let drop = Droplet(workDir: workDir, providers: [mustache])
 
 drop.get("/") { request in
-    return try drop.view("index.mustache", context: [
-        "greeting": "Hello, world!"
-    ])
+    return try drop.view("index.mustache", context: IndexHandler().gatherContent())
 }
 
 drop.get("blog") { request in
-    return try drop.view("index.mustache", context: [
-        "greeting": "Hello, world!"
+    return try drop.view("blog.mustache", context: [
+        "postTitle": "Hello, world!"
     ])
 }
 
 drop.get("admin/post") { request in
-    return try drop.view("index.mustache", context: [
+    return try drop.view("post-new.mustache", context: [
         "greeting": "Hello, world!"
     ])
 }
 
-let port = drop.config["app", "port"].int ?? 80
+let port = drop.config["app", "port", "host"].int ?? 80
 
 // Print what link to visit for default port
 print("Visit http://localhost:\(port)")

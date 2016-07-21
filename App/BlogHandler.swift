@@ -7,7 +7,7 @@ import Glibc
 import Darwin
 #endif
 
-struct IndexHandler {
+struct BlogHandler {
 
     func gatherContent() -> [String: Any] {
 
@@ -30,7 +30,7 @@ struct IndexHandler {
 
         let imageNumber = Int(arc4random_uniform(25) + 1)
         finalDict["featuredImageURI"] = "/images/random/random-\(imageNumber).jpg"
-        
+
         return finalDict
     }
 
