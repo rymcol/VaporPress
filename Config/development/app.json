@@ -1,5 +1,5 @@
 {
-	"host": "192.168.1.153",
+	"host": "10.0.1.7",
 	"port": 8080,
 	"key": "development-key"
 }

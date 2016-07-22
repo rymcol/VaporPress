@@ -7,7 +7,24 @@ import Glibc
 import Darwin
 #endif
 
-struct IndexHandler {
+struct Poster {
+
+    func postContent(title: String, content: String, makeFrontPage: Bool) {
+
+        do {
+
+            let sqlite = try! VaporSQLite.Provider(path: "./resources/db/data.sqlite")
+            try sqlite.driver.raw("INSERT INTO posts (post_title, post_content) VALUES (?1,?2)", values: [title, content])
+
+        } catch {
+            print("sqlite Erros Occured")
+        }
+
+    }
+
+}
+
+struct NewPostHandler {
 
     func gatherContent() -> [String: Any] {
 
@@ -26,11 +43,11 @@ struct IndexHandler {
             print("sqlite Erros Occured")
         }
 
-        finalDict["title"] = "Site Homepage"
+        finalDict["title"] = "Add New Post"
 
         let imageNumber = Int(arc4random_uniform(25) + 1)
         finalDict["featuredImageURI"] = "/images/random/random-\(imageNumber).jpg"
-        
+
         return finalDict
     }
 

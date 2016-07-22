@@ -25,12 +25,22 @@ drop.get("/") { request in
 }
 
 drop.get("blog") { request in
-    return try drop.view("blog.mustache", context: [
-        "postTitle": "Hello, world!"
-    ])
+    return try drop.view("blog.mustache", context: BlogHandler().gatherContent())
 }
 
 drop.get("admin/post") { request in
+
+    return try drop.view("post-new.mustache", context: [
+        "greeting": "Hello, world!"
+    ])
+}
+
+drop.post("admin/post") {request in
+
+    if let title = request.data["post_title"].string, content = request.data["postContent"].string {
+            Poster().postContent(title: title, content: content, makeFrontPage: false)
+    }
+
     return try drop.view("post-new.mustache", context: [
         "greeting": "Hello, world!"
     ])
