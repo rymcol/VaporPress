@@ -1,11 +1,11 @@
 import PackageDescription
 
 let package = Package(
-    name: "VaporApp",
+    name: "VaporPress",
     targets: [],
     dependencies: [
-        .Package(url: "https://github.com/qutheory/vapor-sqlite.git", versions: Version(0,0,0)..<Version(10,0,0)),
-		.Package(url: "https://github.com/qutheory/vapor-mustache.git", majorVersion: 0, minor: 9),
+        .Package(url: "https://github.com/vapor/vapor.git", majorVersion: 0, minor: 16),
+		.Package(url: "https://github.com/vapor/mustache-provider.git", majorVersion: 0, minor: 0),
     ],
     exclude: [
 	    "Config",

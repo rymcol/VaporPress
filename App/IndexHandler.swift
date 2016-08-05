@@ -1,5 +1,4 @@
 import Vapor
-import VaporSQLite
 
 #if os(Linux)
 import Glibc
@@ -11,27 +10,20 @@ struct IndexHandler {
 
     func gatherContent() -> [String: Any] {
 
-        var finalDict = [String: Any]()
+        var post = "No Content Was Found"
 
-        do {
-
-            let sqlite = try! VaporSQLite.Provider(path: "./resources/db/data.sqlite")
-            let results = try sqlite.driver.raw("SELECT post_content, post_title FROM posts WHERE id=(SELECT value FROM options WHERE option = 'front_page')")
-
-            for (key, value) in results[0] {
-                finalDict[key] = value
-            }
-
-        } catch {
-            print("sqlite Erros Occured")
+        let randomContent = ContentGenerator().generate()
+        if let randomVal = randomContent["Test Post 1"] {
+            post = randomVal as! String
         }
-
-        finalDict["title"] = "Site Homepage"
-
         let imageNumber = Int(arc4random_uniform(25) + 1)
-        finalDict["featuredImageURI"] = "/images/random/random-\(imageNumber).jpg"
-        
-        return finalDict
+
+        return [
+            "post_content": "\(post)",
+            "post_title": "Test Post 1",
+            "featuredImageURI": "/images/random/random-\(imageNumber).jpg",
+            "featuredImageAltText": "Demo Image \(imageNumber)",
+        ]
     }
 
 }
