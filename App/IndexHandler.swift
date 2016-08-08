@@ -23,6 +23,7 @@ struct IndexHandler {
             "post_title": "Test Post 1",
             "featuredImageURI": "/images/random/random-\(imageNumber).jpg",
             "featuredImageAltText": "Demo Image \(imageNumber)",
+            "title": "VaporPress | Home"
         ]
     }
 

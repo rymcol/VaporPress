@@ -33,7 +33,7 @@ struct BlogHandler {
             content.append(["post_title": "Test Post \(index)", "post_content": value, "featuredImageURI": "/images/random/random-\(imageNumber).jpg", "featuredImageAltText": "Demo Image \(imageNumber)"])
         }
 
-        finalDict["title"] = "Blog"
+        finalDict["title"] = "VaporPress | Blog"
 
         // let imageNumber = Int(arc4random_uniform(25) + 1)
         // finalDict["featuredImageURI"] = "/images/random/random-\(imageNumber).jpg"
