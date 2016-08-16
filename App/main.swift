@@ -16,6 +16,7 @@ drop.get("blog") { request in
     return try drop.view("blog.mustache", context: BlogHandler().gatherContent())
 }
 
+drop.middleware = []
 let port = drop.config["app", "port", "host"].int ?? 80
 
 // Print what link to visit for default port
