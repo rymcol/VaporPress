@@ -1,22 +1,26 @@
 import Vapor
-import VaporMustache
+import HTTP
 
-let mustache = VaporMustache.Provider(withIncludes: [
-        "header": "Includes/header.mustache",
-        "footer": "Includes/footer.mustache"
-    ])
-
-let drop = Droplet(initializedProviders: [mustache])
+let drop = Droplet()
 
 drop.get("/") { request in
-    return try drop.view("index.mustache", context: IndexHandler().gatherContent())
+    let header = CommonHandler().getHeader()
+    let footer = CommonHandler().getFooter()
+    let pageContent = IndexHandler().loadPageContent()
+    let fullPage = header + footer + pageContent
+
+    return Response(status: .ok, body: fullPage)
 }
 
 drop.get("blog") { request in
-    return try drop.view("blog.mustache", context: BlogHandler().gatherContent())
+    let header = CommonHandler().getHeader()
+    let footer = CommonHandler().getFooter()
+    let pageContent = BlogHandler().loadPageContent()
+    let fullPage = header + footer + pageContent
+
+    return Response(status: .ok, body: fullPage)
 }
 
-drop.middleware = []
 let port = drop.config["app", "port", "host"].int ?? 80
 
 // Print what link to visit for default port
